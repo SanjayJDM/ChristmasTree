@@ -11,23 +11,35 @@ import urllib2
 #13 - GREEN
 #16 - BUZZER
 
-def redLight(t = 10):
+def coolLight1Blink(t):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
  GPIO.setup(11,GPIO.OUT)
  try:
    GPIO.output(11, GPIO.LOW)
-   if t == 10:
-    for x in range(7):
+   if t <> 0:
+    for x in range(t):
      buzzer(1)
      time.sleep(1)
-   time.sleep(t)
    GPIO.output(11,GPIO.HIGH)
  except KeyboardInterrupt:
    GPIO.output(11,GPIO.HIGH)
    GPIO.cleanup()
 
-def amberLight(t = 10):
+def coolLight1Stay(t):
+ GPIO.setmode(GPIO.BOARD)
+ GPIO.setwarnings(False)
+ GPIO.setup(11,GPIO.OUT)
+ try:
+   GPIO.output(11, GPIO.LOW)
+   time.sleep(t)
+   GPIO.output(11,GPIO.HIGH)
+ except KeyboardInterrupt:
+   GPIO.output(11,GPIO.HIGH)
+   GPIO.cleanup()
+# testing coolLight1Blink and coolLight1Stay
+
+def coolLight2(t = 10):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
  GPIO.setup(32,GPIO.OUT)
@@ -45,7 +57,7 @@ def amberLight(t = 10):
    GPIO.output(32,GPIO.HIGH)
    GPIO.cleanup()
 
-def greenLight(t = 10):
+def warmLight1(t = 10):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
  GPIO.setup(33,GPIO.OUT)
@@ -58,7 +70,7 @@ def greenLight(t = 10):
    GPIO.output(33,GPIO.HIGH)
    GPIO.cleanup()
 
-def buzzer(t = 1):
+def warmLight2(t = 1):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
  GPIO.setup(16,GPIO.OUT)
@@ -71,16 +83,13 @@ def buzzer(t = 1):
    GPIO.cleanup()
 
 
-def single():
+def test():
 # for x in range(7):
  while True:
-  greenLight(10)
-  amberLight(1)
+  coolLight1Stay(5)
+  coolLight1Blink(10)
 
 
 
 print "Good news"
-
-greenLight(1)
-amberLight(1)
-single()
+test()
