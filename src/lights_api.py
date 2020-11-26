@@ -14,7 +14,7 @@ import urllib2
 app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
-
+#test
 def redLight(t = 10):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
