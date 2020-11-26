@@ -93,7 +93,7 @@ def main():
     time.sleep(3)
 
     # Send some text
-    lcd_string("SANJAY",LCD_LINE_1)
+    lcd_string("SANJAY JDM",LCD_LINE_1)
     lcd_string("JONATHAN SANJAY",LCD_LINE_2)
 
     time.sleep(3)
