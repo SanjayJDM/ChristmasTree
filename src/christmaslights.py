@@ -14,27 +14,27 @@ import urllib2
 def coolLight1Blink(t):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
- GPIO.setup(11,GPIO.OUT)
+ GPIO.setup(33,GPIO.OUT)
  try:
-   GPIO.output(11, GPIO.LOW)
+   GPIO.output(33, GPIO.LOW)
    if t <> 0:
     for x in range(t):
      time.sleep(1)
-   GPIO.output(11,GPIO.HIGH)
+   GPIO.output(33,GPIO.HIGH)
  except KeyboardInterrupt:
-   GPIO.output(11,GPIO.HIGH)
+   GPIO.output(33,GPIO.HIGH)
    GPIO.cleanup()
 
 def coolLight1Stay(t):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
- GPIO.setup(11,GPIO.OUT)
+ GPIO.setup(32,GPIO.OUT)
  try:
-   GPIO.output(11, GPIO.LOW)
+   GPIO.output(32, GPIO.LOW)
    time.sleep(t)
-   GPIO.output(11,GPIO.HIGH)
+   GPIO.output(32,GPIO.HIGH)
  except KeyboardInterrupt:
-   GPIO.output(11,GPIO.HIGH)
+   GPIO.output(32,GPIO.HIGH)
    GPIO.cleanup()
 # testing coolLight1Blink and coolLight1Stay
 
