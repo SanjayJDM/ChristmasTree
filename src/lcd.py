@@ -87,7 +87,7 @@ def main():
     time.sleep(3) # 3 second delay
 
     # Send some text
-    lcd_string("RaspberryPi-spy",LCD_LINE_1)
+    lcd_string("RaspberryPi-spy1",LCD_LINE_1)
     lcd_string(".co.uk",LCD_LINE_2)
 
     time.sleep(3)
