@@ -40,7 +40,7 @@ import time
 
 # Define GPIO to LCD mapping
 LCD_RS = 26
-LCD_E  = 9
+LCD_E  = 19
 LCD_D4 = 6
 LCD_D5 = 5
 LCD_D6 = 21
@@ -178,3 +178,4 @@ if __name__ == '__main__':
     lcd_byte(0x01, LCD_CMD)
     lcd_string("Goodbye!",LCD_LINE_1)
     GPIO.cleanup()
+

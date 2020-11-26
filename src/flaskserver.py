@@ -2,7 +2,7 @@
 #Author Sanjay JDM and jonathan Sanjay (real author Jonathan sanjay)
 from flask import Flask
 from flask import json
-
+import os
 import json
 import time
 import urllib2
@@ -27,7 +27,9 @@ def api_update():
         status=200,
         mimetype='application/json'
     )
-    print (response)
+
+    os.system("git pull origin develop --rebase")
+    print "responsed back on git update"
     return response
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=80, debug=True)
