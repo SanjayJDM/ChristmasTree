@@ -76,7 +76,7 @@ def main():
 
     # Send some test
     lcd_string("Rasbperry Pi",LCD_LINE_1)
-    lcd_string("16x2 LCD Test",LCD_LINE_2)
+    lcd_string("16x2 LCD ",LCD_LINE_2)
 
     time.sleep(3) # 3 second delay
 
