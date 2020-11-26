@@ -29,7 +29,7 @@ def api_update():
     )
 
     os.system("git pull origin develop --rebase")
-    print response
+    print "responsed back on git update"
     return response
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
