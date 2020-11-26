@@ -28,7 +28,7 @@ def api_update():
         mimetype='application/json'
     )
 
-    os.system("git pull origin develop")
+    os.system("git pull origin develop --rebase")
     print response
     return response
 if __name__ == "__main__":
