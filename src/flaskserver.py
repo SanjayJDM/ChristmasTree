@@ -27,7 +27,7 @@ def api_update():
         status=200,
         mimetype='application/json'
     )
-    print (response)
+    print response
     return response
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=80, debug=True)
