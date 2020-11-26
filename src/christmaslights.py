@@ -70,9 +70,6 @@ def buzzer(t = 1):
    GPIO.output(16,GPIO.HIGH)
    GPIO.cleanup()
 
-#BOT token xoxb-238520891088-9rB3ZGdOiqIIUcRyFwemT049&channel Slack  Channel C6THLN6K1
-#url = 'https://slack.com/api/channels.history?token=xoxb-39731808647-ymi8gtBHPAnoz6jIkdvi4dqN&channel=C0YV073RV&count=1&unreads=1&latest=now'
-
 
 def single():
 # for x in range(7):
