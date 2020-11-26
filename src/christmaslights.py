@@ -80,11 +80,12 @@ def warmLight2(t = 1):
 
 def test():
 # for x in range(7):
- while True:
-  coolLight1Stay(5)
-  coolLight1Blink(10)
-
-
+ try:
+   while True:
+    coolLight1Stay(5)
+    coolLight1Blink(10)
+ except KeyboardInterrupt:
+   GPIO.cleanup()
 
 print "Good news"
 test()
