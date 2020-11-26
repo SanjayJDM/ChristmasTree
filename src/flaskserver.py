@@ -2,7 +2,7 @@
 #Author Sanjay JDM and jonathan Sanjay (real author Jonathan sanjay)
 from flask import Flask
 from flask import json
-
+import os
 import json
 import time
 import urllib2
@@ -27,6 +27,8 @@ def api_update():
         status=200,
         mimetype='application/json'
     )
+
+    os.system("git pull origin develop")
     print response
     return response
 if __name__ == "__main__":
