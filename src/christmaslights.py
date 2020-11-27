@@ -202,7 +202,6 @@ def All_differentOrder(t):
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
-print "Good news testing Blink All"
 #blinkAll(1)
 #GPIO.cleanup()
 #blinkCool_oneAtaTime(1)
@@ -215,6 +214,7 @@ def api_root():
     return {
            "url": request.url
                          }
+
 @app.route('/christmaslight/coolall/', methods=["GET", "POST"])
 def api_coolall():
     api_stop()
@@ -287,8 +287,8 @@ def api_blinkone():
     )
     return response
 
-@app.route('/christmaslight/all/', methods=["GET", "POST"])
-def api_all():
+@app.route('/christmaslight/random/', methods=["GET", "POST"])
+def api_random():
     api_stop()
     time.sleep(0.3)
     All_differentOrder(0.3)
