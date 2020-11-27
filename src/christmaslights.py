@@ -107,7 +107,7 @@ def blinkAllAtOnce(t):
 def blinkAll_oneAtaTime(t):
   GPIO.setmode(GPIO.BOARD)
   GPIO.setwarnings(False)
-  chan_list = (12,16)
+  chan_list = (8,10,12,16)
   GPIO.setup(chan_list,GPIO.OUT)
   try:
    while True:
@@ -135,6 +135,7 @@ def blinkAll_oneAtaTime(t):
 def All_differentOrder(t):
   GPIO.setmode(GPIO.BOARD)
   GPIO.setwarnings(False)
+  chan_list = (8,10,12,16)
   GPIO.setup(chan_list,GPIO.OUT)
   try:
    while True:
