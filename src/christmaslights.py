@@ -46,9 +46,9 @@ def blinkAll(t):
  try:
   for x in range(10):
    GPIO.output(chan_list, GPIO.LOW)
-   time.sleep(0.1)
+   time.sleep(0.3)
    GPIO.output(chan_list, GPIO.HIGH)
-   time.sleep(0.1)
+   time.sleep(0.3)
   GPIO.cleanup()
  except KeyboardInterrupt:
   GPIO.output(chan_list,GPIO.HIGH)
