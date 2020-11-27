@@ -49,8 +49,8 @@ def blinkAll(t):
             time.sleep(t)
             GPIO.output(chan_list, GPIO.HIGH)
      except KeyboardInterrupt:
-       GPIO.output(chan_list,GPIO.HIGH)
-       GPIO.cleanup()
+         GPIO.output(chan_list,GPIO.HIGH)
+         GPIO.cleanup()
 
 
 def coolLight2(t = 10):
