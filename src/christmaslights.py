@@ -6,23 +6,41 @@ import json
 import time
 import urllib2
 
-#11 - RED
-#12 - AMBER
-#13 - GREEN
+#8 - RED
+#10 - AMBER
+#12 - GREEN
 #16 - BUZZER
 
-def coolLight1Blink(t):
- GPIO.setmode(GPIO.BOARD)
- GPIO.setwarnings(False)
- GPIO.setup(33,GPIO.OUT)
- try:
-   GPIO.output(33, GPIO.LOW)
-   if t <> 0:
-    for x in range(t):
-     time.sleep(1)
-   GPIO.output(33,GPIO.HIGH)
- except KeyboardInterrupt:
-   GPIO.output(33,GPIO.HIGH)
+def blinkCool(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (8,10)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   for x in range(10):
+    GPIO.output(chan_list, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(chan_list, GPIO.HIGH)
+    time.sleep(0.3)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
+   GPIO.cleanup()
+
+def blinkWarm(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (12,16)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   for x in range(10):
+    GPIO.output(chan_list, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(chan_list, GPIO.HIGH)
+    time.sleep(0.3)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
 def coolLight1Stay(t):
@@ -41,7 +59,7 @@ def coolLight1Stay(t):
 def blinkAll(t):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
- chan_list = (33,32)
+ chan_list = (18,10,12,16)
  GPIO.setup(chan_list,GPIO.OUT)
  try:
   for x in range(10):
@@ -106,4 +124,8 @@ def test():
 
 print "Good news testing Blink All"
 blinkAll(1)
+GPIO.cleanup()
+blinkCool(1)
+GPIO.cleanup()
+blinkWarm(1)
 GPIO.cleanup()
