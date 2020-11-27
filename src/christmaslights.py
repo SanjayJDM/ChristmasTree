@@ -38,6 +38,21 @@ def coolLight1Stay(t):
    GPIO.cleanup()
 # testing coolLight1Blink and coolLight1Stay
 
+def blinkAll(t):
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    chan_list = (33,32)
+    GPIO.setup(chan_list,GPIO.OUT)
+    try:
+        for x in range(5):
+            GPIO.output(chan_list, GPIO.LOW)
+            time.sleep(t)
+            GPIO.output(chan_list, GPIO.HIGH)
+     except KeyboardInterrupt:
+       GPIO.output(chan_list,GPIO.HIGH)
+       GPIO.cleanup()
+
+
 def coolLight2(t = 10):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
@@ -87,5 +102,5 @@ def test():
  except KeyboardInterrupt:
    GPIO.cleanup()
 
-print "Good news"
-test()
+print "Good news testing Blink All"
+blinkAll(1)
