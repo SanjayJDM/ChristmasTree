@@ -11,13 +11,13 @@ import urllib2
 #12 - GREEN
 #16 - BUZZER
 
-def blinkCool(t):
+def blinkCool_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
   GPIO.setwarnings(False)
   chan_list = (8,10)
   GPIO.setup(chan_list,GPIO.OUT)
   try:
-   for x in range(10):
+   while True:
     GPIO.output(chan_list, GPIO.LOW)
     time.sleep(0.3)
     GPIO.output(chan_list, GPIO.HIGH)
@@ -27,7 +27,27 @@ def blinkCool(t):
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
-def blinkWarm(t):
+def blinkCool_oneAtaTime(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (8,10)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(8, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(8, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(10, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(0.3)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
+   GPIO.cleanup()
+
+def blinkWarm_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
   GPIO.setwarnings(False)
   chan_list = (12,16)
@@ -43,23 +63,10 @@ def blinkWarm(t):
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
-def coolLight1Stay(t):
+def blinkAllAtOnce(t):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
- GPIO.setup(32,GPIO.OUT)
- try:
-   GPIO.output(32, GPIO.LOW)
-   time.sleep(t)
-   GPIO.output(32,GPIO.HIGH)
- except KeyboardInterrupt:
-   GPIO.output(32,GPIO.HIGH)
-   GPIO.cleanup()
-# testing coolLight1Blink and coolLight1Stay
-
-def blinkAll(t):
- GPIO.setmode(GPIO.BOARD)
- GPIO.setwarnings(False)
- chan_list = (18,10,12,16)
+ chan_list = (8,10,12,16)
  GPIO.setup(chan_list,GPIO.OUT)
  try:
   for x in range(10):
@@ -123,9 +130,9 @@ def test():
    GPIO.cleanup()
 
 print "Good news testing Blink All"
-blinkAll(1)
+#blinkAll(1)
+#GPIO.cleanup()
+blinkCool_oneAtaTime(1)
 GPIO.cleanup()
-blinkCool(1)
-GPIO.cleanup()
-blinkWarm(1)
-GPIO.cleanup()
+#blinkWarm(1)
+#GPIO.cleanup()
