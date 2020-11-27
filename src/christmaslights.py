@@ -94,7 +94,7 @@ def blinkAllAtOnce(t):
  chan_list = (8,10,12,16)
  GPIO.setup(chan_list,GPIO.OUT)
  try:
-  for x in range(10):
+  while True:
    GPIO.output(chan_list, GPIO.LOW)
    time.sleep(0.3)
    GPIO.output(chan_list, GPIO.HIGH)
@@ -175,7 +175,8 @@ def api_root():
                          }
 @app.route('/christmaslight/coolall/', methods=["GET", "POST"])
 def api_coolall():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     blinkCool_allTogether(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
@@ -186,7 +187,8 @@ def api_coolall():
 
 @app.route('/christmaslight/coolone/', methods=["GET", "POST"])
 def api_coolone():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     blinkCool_oneAtaTime(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
@@ -197,7 +199,8 @@ def api_coolone():
 
 @app.route('/christmaslight/warmall/', methods=["GET", "POST"])
 def api_warmall():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     blinkWarm_allTogether(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
@@ -208,7 +211,8 @@ def api_warmall():
 
 @app.route('/christmaslight/warmone/', methods=["GET", "POST"])
 def api_warmone():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     blinkWarm_oneAtaTime(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
@@ -219,7 +223,8 @@ def api_warmone():
 
 @app.route('/christmaslight/blinkall/', methods=["GET", "POST"])
 def api_blinkall():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     blinkAllAtOnce(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
@@ -230,7 +235,8 @@ def api_blinkall():
 
 @app.route('/christmaslight/blinkone/', methods=["GET", "POST"])
 def api_blinkone():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     blinkAll_oneAtaTime(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
@@ -241,7 +247,8 @@ def api_blinkone():
 
 @app.route('/christmaslight/all/', methods=["GET", "POST"])
 def api_all():
-    GPIO.cleanup()
+    api_stop()
+    time.sleep(0.3)
     All_differentOrder(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
