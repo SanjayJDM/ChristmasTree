@@ -1,6 +1,7 @@
-#New RelicAlert Bot
+#CHRISTMAS LIGHTS THROUGH API
 #Author Sanjay JDM
-
+from flask import Flask
+from flask import json
 import RPi.GPIO as GPIO
 import json
 import time
@@ -10,6 +11,10 @@ import urllib2
 #10 - AMBER
 #12 - GREEN
 #16 - BUZZER
+
+app = Flask(__name__)
+
+@app.route('/', methods=["GET"])
 
 def blinkCool_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
@@ -120,19 +125,52 @@ def warmLight2(t = 1):
    GPIO.cleanup()
 
 
-def test():
-# for x in range(7):
- try:
-   while True:
-    coolLight1Stay(5)
-    coolLight1Blink(10)
- except KeyboardInterrupt:
-   GPIO.cleanup()
-
 print "Good news testing Blink All"
 #blinkAll(1)
 #GPIO.cleanup()
-blinkCool_oneAtaTime(1)
+#blinkCool_oneAtaTime(1)
 GPIO.cleanup()
 #blinkWarm(1)
 #GPIO.cleanup()
+
+#API Modules
+def api_root():
+    return {
+           "url": request.url
+                         }
+@app.route('/christmaslight/coolall/', methods=["GET", "POST"])
+def api_coolall():
+    GPIO.cleanup()
+    blinkCool_allTogether(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/coolone/', methods=["GET", "POST"])
+def api_coolall():
+    GPIO.cleanup()
+    blinkCool_oneAtaTime(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/stop/', methods=["GET", "POST"])
+def api_coolall():
+    GPIO.cleanup()
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=3000, debug=True)
+
+p
