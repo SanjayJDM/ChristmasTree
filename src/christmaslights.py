@@ -68,6 +68,26 @@ def blinkWarm_allTogether(t):
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
+def blinkWarm_oneAtaTime(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (12,16)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(12, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(12, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(16, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(16, GPIO.HIGH)
+    time.sleep(0.3)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
+   GPIO.cleanup()
+
 def blinkAllAtOnce(t):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
@@ -84,45 +104,60 @@ def blinkAllAtOnce(t):
   GPIO.output(chan_list,GPIO.HIGH)
   GPIO.cleanup()
 
-def coolLight2(t = 10):
- GPIO.setmode(GPIO.BOARD)
- GPIO.setwarnings(False)
- GPIO.setup(32,GPIO.OUT)
- try:
-   GPIO.output(32, GPIO.LOW)
-   if t == 10:
-    for x in range(4):
-     time.sleep(1)
-   time.sleep(t)
-   GPIO.output(32,GPIO.HIGH)
- except KeyboardInterrupt:
-   GPIO.output(32,GPIO.HIGH)
+def blinkAll_oneAtaTime(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (12,16)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(8, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(8, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(10, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(12, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(12, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(16, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(16, GPIO.HIGH)
+    time.sleep(0.3)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
-def warmLight1(t = 10):
- GPIO.setmode(GPIO.BOARD)
- GPIO.setwarnings(False)
- GPIO.setup(33,GPIO.OUT)
- try:
-   GPIO.output(33, GPIO.LOW)
-   time.sleep(t)
-   GPIO.output(33,GPIO.HIGH)
- except KeyboardInterrupt:
-   GPIO.output(33,GPIO.HIGH)
+def All_differentOrder(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(8, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(8, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(12, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(12, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(10, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(0.3)
+    GPIO.output(16, GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(16, GPIO.HIGH)
+    time.sleep(0.3)
    GPIO.cleanup()
-
-def warmLight2(t = 1):
- GPIO.setmode(GPIO.BOARD)
- GPIO.setwarnings(False)
- GPIO.setup(16,GPIO.OUT)
- try:
-   GPIO.output(16, GPIO.LOW)
-   time.sleep(t)
-   GPIO.output(16,GPIO.HIGH)
- except KeyboardInterrupt:
-   GPIO.output(16,GPIO.HIGH)
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
-
 
 print "Good news testing Blink All"
 #blinkAll(1)
@@ -159,6 +194,61 @@ def api_coolone():
     )
     return response
 
+@app.route('/christmaslight/warmall/', methods=["GET", "POST"])
+def api_warmall():
+    GPIO.cleanup()
+    blinkWarm_allTogether(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/warmone/', methods=["GET", "POST"])
+def api_warmone():
+    GPIO.cleanup()
+    blinkWarm_oneAtaTime(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/blinkall/', methods=["GET", "POST"])
+def api_blinkall():
+    GPIO.cleanup()
+    blinkAllAtOnce(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/blinkone/', methods=["GET", "POST"])
+def api_blinkone():
+    GPIO.cleanup()
+    blinkAll_oneAtaTime(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/all/', methods=["GET", "POST"])
+def api_all():
+    GPIO.cleanup()
+    All_differentOrder(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
 @app.route('/christmaslight/stop/', methods=["GET", "POST"])
 def api_stop():
     GPIO.cleanup()
@@ -168,6 +258,6 @@ def api_stop():
         mimetype='application/json'
     )
     return response
-    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3000, debug=True)
