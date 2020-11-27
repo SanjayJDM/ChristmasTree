@@ -16,6 +16,21 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
 
+def stayCool_allTogether(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (8,10)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(chan_list, GPIO.LOW)
+   GPIO.output(chan_list, GPIO.HIGH)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
+   GPIO.cleanup()
+
+
 def blinkCool_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
   GPIO.setwarnings(False)
@@ -58,7 +73,7 @@ def blinkWarm_allTogether(t):
   chan_list = (12,16)
   GPIO.setup(chan_list,GPIO.OUT)
   try:
-   for x in range(10):
+   while True:
     GPIO.output(chan_list, GPIO.LOW)
     time.sleep(0.3)
     GPIO.output(chan_list, GPIO.HIGH)
@@ -250,6 +265,18 @@ def api_all():
     api_stop()
     time.sleep(0.3)
     All_differentOrder(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/staycool/', methods=["GET", "POST"])
+def api_staycool():
+    api_stop()
+    time.sleep(0.3)
+    stayCool_allTogether(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
         status=200,
