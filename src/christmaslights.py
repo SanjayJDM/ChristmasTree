@@ -129,7 +129,7 @@ print "Good news testing Blink All"
 #blinkAll(1)
 #GPIO.cleanup()
 #blinkCool_oneAtaTime(1)
-GPIO.cleanup()
+#GPIO.cleanup()
 #blinkWarm(1)
 #GPIO.cleanup()
 
