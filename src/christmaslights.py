@@ -84,7 +84,6 @@ def blinkAllAtOnce(t):
   GPIO.output(chan_list,GPIO.HIGH)
   GPIO.cleanup()
 
-
 def coolLight2(t = 10):
  GPIO.setmode(GPIO.BOARD)
  GPIO.setwarnings(False)
@@ -172,5 +171,3 @@ def api_coolall():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3000, debug=True)
-
-p
