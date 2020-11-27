@@ -28,7 +28,7 @@ def api_update():
         mimetype='application/json'
     )
 
-    os.system("git pull origin develop --rebase")
+    os.system("sudo git pull origin develop --rebase")
     print "responsed back on git update"
     return response
 if __name__ == "__main__":
