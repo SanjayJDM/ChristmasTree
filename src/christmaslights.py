@@ -7,10 +7,10 @@ import json
 import time
 import urllib2
 
-#8 - RED
-#10 - AMBER
-#12 - GREEN
-#16 - BUZZER
+#8 - cool1
+#10 - cool2
+#12 - warm1
+#16 - warm2
 
 app = Flask(__name__)
 
@@ -30,6 +30,33 @@ def stayCool_allTogether(t):
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
 
+def stayWarm_allTogether(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (12,16)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(chan_list, GPIO.LOW)
+   GPIO.output(chan_list, GPIO.HIGH)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
+   GPIO.cleanup()
+
+def stayAll(t):
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+  chan_list = (8,10,12,16)
+  GPIO.setup(chan_list,GPIO.OUT)
+  try:
+   while True:
+    GPIO.output(chan_list, GPIO.LOW)
+   GPIO.output(chan_list, GPIO.HIGH)
+   GPIO.cleanup()
+  except KeyboardInterrupt:
+   GPIO.output(chan_list,GPIO.HIGH)
+   GPIO.cleanup()
 
 def blinkCool_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
@@ -277,6 +304,30 @@ def api_staycool():
     api_stop()
     time.sleep(0.3)
     stayCool_allTogether(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/staywarm/', methods=["GET", "POST"])
+def api_staywarm():
+    api_stop()
+    time.sleep(0.3)
+    stayWarm_allTogether(0.3)
+    response = app.response_class(
+        response=json.dumps("GIT ACTION"),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/christmaslight/stayall/', methods=["GET", "POST"])
+def api_stayall():
+    api_stop()
+    time.sleep(0.3)
+    stayAll(0.3)
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
         status=200,
