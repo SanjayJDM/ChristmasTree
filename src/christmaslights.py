@@ -147,7 +147,6 @@ def api_coolall():
         mimetype='application/json'
     )
     return response
-
 @app.route('/christmaslight/coolone/', methods=["GET", "POST"])
 def api_coolall():
     GPIO.cleanup()
@@ -158,7 +157,6 @@ def api_coolall():
         mimetype='application/json'
     )
     return response
-
 @app.route('/christmaslight/stop/', methods=["GET", "POST"])
 def api_coolall():
     GPIO.cleanup()
@@ -168,6 +166,5 @@ def api_coolall():
         mimetype='application/json'
     )
     return response
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3000, debug=True)
