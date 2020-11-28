@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+html, body {
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+.table {
+    display:table;
+    width:20%;
+    height:20%;
+    border:1px solid #000;
+}
+.row {
+    display:table-row;
+    height:20%;
+}
+.cell1, .cell2, .cell3 {
+    display:table-cell;
+    width:33%;
+    height:20%;
+    border:1px solid #CCC;
+}
+.cell2 > img {
+    width:20%;
+    height:20%;
+}
+</style>
+<script type="text/javascript">
+
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    function checkCookie() {
+        var user = getCookie("username");
+        if (user != "") {
+            alert("Welcome again " + user);
+        } else {
+            user = prompt("Enter your name:", "");
+            var password = prompt("Enter password");
+            if (user == "san j" && password == Math.round(Math.sin(30) + Math.cos(30) * Math.sqrt(Math.tan(60))) + 22) {
+                setCookie("username", user, 30);
+            }
+            else {
+                alert("Invalid username password");
+                quitBox();
+            }
+            if (user != "" && user != null) {
+                setCookie("username", user, 30);
+            }
+        }
+    }
+
+    function quitBox() {
+
+        open(location, '_self').close();
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+</script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+        <script>
+
+                function stop() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/stop/", true);
+                    xhr.send();
+                }
+
+                function blink_cool_all() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/coolall/", true);
+                    xhr.send();
+                }
+
+                function blink_cool_one() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/coolone/", true);
+                    xhr.send();
+                }
+
+                function blink_warm_all() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/warmall/", true);
+                    xhr.send();
+                }
+
+                function blink_warm_one() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/warmone/", true);
+                    xhr.send();
+                }
+
+                function blink_all() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/blinkall/", true);
+                    xhr.send();
+                }
+
+                function blink_one() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/blinkone/", true);
+                    xhr.send();
+                }
+
+                function mix() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/random/", true);
+                    xhr.send();
+                }
+
+                function stay_cool() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/staycool/", true);
+                    xhr.send();
+                }
+
+                function stay_warm() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/staywarm/", true);
+                    xhr.send();
+                }
+
+                function stay_all() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://192.168.0.39:3000/christmaslight/stayall/", true);
+                    xhr.send();
+                }
+
+                </script>
+      <Center>
+        <p>Christmas Lights</p>
+
+    <div class="table">
+            <div class="row">
+                <div class="cell1"><img src="img/coolWhite.jpg" height="40" width="40"/></div>
+                <div class="cell2"> <a href="#" onmousedown="javscript:blink_cool_all()">Blink</a></div>
+                <div class="cell3"> <a href="#" onmousedown="javscript:blink_cool_one()">Blink Seq</a></div>
+                <div class="cell4"> <a href="#" onmousedown="javscript:stay_cool()">  Stay  </a></div>
+            </div>
+            <div class="row">
+                <div class="cell1"><img src="img/warmWhite.jpg" height="40" width="40"/></div>
+                <div class="cell2"> <a href="#" onmousedown="javscript:blink_warm_all()">Blink</a></div>
+                <div class="cell3"> <a href="#" onmousedown="javscript:blink_warm_one()">Blink seq</a></div>
+                <div class="cell4"> <a href="#" onmousedown="javscript:stay_warm()">  Stay  </a></div>
+            </div>
+            <div class="row">
+                <div class="cell1"><img src="img/warmWhite.jpg" height="40" width="40"/><img src="img/coolWhite.jpg" height="40" width="40"/></div>
+                <div class="cell2"> <a href="#" onmousedown="javscript:blink_all()">Blink</a></div>
+                <div class="cell3"> <a href="#" onmousedown="javscript:blink_one()">Blink Seq</a></div>
+                <div class="cell4"> <a href="#" onmousedown="javscript:stay_all()">  Stay  </a></div>
+            </div>
+            <div class="row">
+                <div class="cell1"><img src="img/stop.jpg" height="40" width="40"/></div>
+                <div class="cell2"> <a href="#" onmousedown="javscript:stop()">Stop All</a></div>
+                <div class="cell1"><img src="img/mix.png" height="40" width="40"/></div>
+                <div class="cell4"> <a href="#" onmousedown="javscript:mix()">Mix All</a></div>
+            </div>
+        </div>
+        </Center>
+
+</body>
+</html>
