@@ -22,7 +22,7 @@ def api_root():
 
 @app.route('/gitupdate/update/', methods=["GET", "POST"])
 def api_update():
-    contents = urllib.request.urlopen("http://192.168.0.39:3000/christmaslight/kill/").read()
+    contents = urllib2.urlopen("http://192.168.0.39:3000/christmaslight/kill/").read()
     response = app.response_class(
         response=json.dumps("GIT ACTION"),
         status=200,
@@ -32,7 +32,7 @@ def api_update():
     os.system("sudo git pull origin develop --rebase")
     print "responsed back on git update"
     os.system("sudo python christmaslight.py")
-    stayall = urllib.request.urlopen("http://192.168.0.39:3000/christmaslight/status?t=0.2&n=4").read()
+    stayall = urllib2.urlopen("http://192.168.0.39:3000/christmaslight/status?t=0.2&n=4").read()
 
 
     return response
