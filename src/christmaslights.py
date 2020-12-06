@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 import json
 import time
 import urllib2
+import sys
 
 #8 - cool1
 #10 - cool2
@@ -364,7 +365,7 @@ def api_stop():
 @app.route('/christmaslight/kill/', methods=["GET", "POST"])
 def api_kill():
     GPIO.cleanup()
-    exit()
+    sys.exit(0)
     response = app.response_class(
         response=json.dumps("Shutdown Program"),
         status=200,
