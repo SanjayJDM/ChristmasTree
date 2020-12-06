@@ -364,7 +364,7 @@ def api_stop():
 @app.route('/christmaslight/kill/', methods=["GET", "POST"])
 def api_kill():
     GPIO.cleanup()
-    quit()
+    exit()
     response = app.response_class(
         response=json.dumps("Shutdown Program"),
         status=200,
