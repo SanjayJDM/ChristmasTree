@@ -208,7 +208,7 @@ def Status_allTogether(t,n):
   chan_list = (12,16)
   GPIO.setup(chan_list,GPIO.OUT)
   try:
-   for x in range(n)::
+   for x in range(n):
     GPIO.output(chan_list, GPIO.LOW)
     time.sleep(t)
     GPIO.output(chan_list, GPIO.HIGH)
