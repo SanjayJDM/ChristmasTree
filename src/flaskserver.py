@@ -32,7 +32,7 @@ def api_update():
     os.system("sudo git pull origin develop --rebase")
     print "responsed back on git update"
     os.system("sudo python christmaslights.py")
-    time.sleep(5)
+    time.sleep(20)
     stayall = urllib2.urlopen("http://192.168.0.39:3000/christmaslight/status?t=0.2&n=4").read()
 
 
