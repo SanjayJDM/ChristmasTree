@@ -25,9 +25,6 @@ def api_update():
 
     os.system("sudo git pull origin develop --rebase")
     print "responsed back on git update"
-    
-    os.system("sudo pkill -f /home/pi/ChristmasTree/src/christmaslights.py")
-    os.system("sudo python /home/pi/ChristmasTree/src/christmaslights.py")
     #time.sleep(10)
     #stayall = urllib2.urlopen("http://192.168.0.39:3000/christmaslight/blinkall").read()
     response = app.response_class(
