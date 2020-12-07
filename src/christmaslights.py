@@ -12,6 +12,8 @@ import sys
 #10 - cool2
 #12 - warm1
 #16 - warm2
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 
 app = Flask(__name__)
 
