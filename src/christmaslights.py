@@ -27,9 +27,10 @@ def stayCool_allTogether(t):
     GPIO.output(chan_list, GPIO.LOW)
    GPIO.output(chan_list, GPIO.HIGH)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def stayWarm_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
@@ -41,9 +42,11 @@ def stayWarm_allTogether(t):
     GPIO.output(chan_list, GPIO.LOW)
    GPIO.output(chan_list, GPIO.HIGH)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def stayAll(t):
   GPIO.setmode(GPIO.BOARD)
@@ -55,9 +58,11 @@ def stayAll(t):
     GPIO.output(chan_list, GPIO.LOW)
    GPIO.output(chan_list, GPIO.HIGH)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def blinkCool_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
@@ -71,9 +76,11 @@ def blinkCool_allTogether(t):
     GPIO.output(chan_list, GPIO.HIGH)
     time.sleep(t)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def blinkCool_oneAtaTime(t):
   GPIO.setmode(GPIO.BOARD)
@@ -91,9 +98,11 @@ def blinkCool_oneAtaTime(t):
     GPIO.output(10, GPIO.HIGH)
     time.sleep(t)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def blinkWarm_allTogether(t):
   GPIO.setmode(GPIO.BOARD)
@@ -107,9 +116,11 @@ def blinkWarm_allTogether(t):
     GPIO.output(chan_list, GPIO.HIGH)
     time.sleep(t)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def blinkWarm_oneAtaTime(t):
   GPIO.setmode(GPIO.BOARD)
@@ -127,9 +138,11 @@ def blinkWarm_oneAtaTime(t):
     GPIO.output(16, GPIO.HIGH)
     time.sleep(t)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def blinkAllAtOnce(t):
  GPIO.setmode(GPIO.BOARD)
@@ -143,9 +156,11 @@ def blinkAllAtOnce(t):
    GPIO.output(chan_list, GPIO.HIGH)
    time.sleep(t)
   GPIO.cleanup()
- except KeyboardInterrupt:
+  return
+ except:
   GPIO.output(chan_list,GPIO.HIGH)
   GPIO.cleanup()
+  return
 
 def blinkAll_oneAtaTime(t):
   GPIO.setmode(GPIO.BOARD)
@@ -171,9 +186,11 @@ def blinkAll_oneAtaTime(t):
     GPIO.output(16, GPIO.HIGH)
     time.sleep(0.3)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def All_differentOrder(t):
   GPIO.setmode(GPIO.BOARD)
@@ -199,9 +216,11 @@ def All_differentOrder(t):
     GPIO.output(16, GPIO.HIGH)
     time.sleep(0.3)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 def Status_allTogether(t,n):
   GPIO.setmode(GPIO.BOARD)
@@ -215,9 +234,11 @@ def Status_allTogether(t,n):
     GPIO.output(chan_list, GPIO.HIGH)
     time.sleep(t)
    GPIO.cleanup()
-  except KeyboardInterrupt:
+   return
+  except:
    GPIO.output(chan_list,GPIO.HIGH)
    GPIO.cleanup()
+   return
 
 #blinkAll(1)
 #GPIO.cleanup()
