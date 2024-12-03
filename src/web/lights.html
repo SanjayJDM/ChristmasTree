@@ -1,188 +1,196 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-}
-html, body {
-    width:100%;
-    height:100%;
-    margin:0;
-    padding:0;
-}
-.table {
-    display:table;
-    width:80%;
-    height:20%;
-    border:1px solid #000;
-}
-.row {
-    display:table-row;
-    height:20%;
-}
-.cell1, .cell2, .cell3 {
-    display:table-cell;
-    width:30%;
-    height:20%;
-    border:1px solid #CCC;
-}
-.cell2 > img {
-    width:50%;
-    height:20%;
-}
-</style>
-<script type="text/javascript">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Lights Control</title>
 
-
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + "; " + expires;
+  <!-- Inline CSS for styling -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
     }
 
-    function checkCookie() {
-        var user = getCookie("username");
-        if (user != "") {
-            alert("Welcome again " + user);
-        } else {
-            user = prompt("Enter your name:", "");
-            var password = prompt("Enter password");
-            if (user == "san j" && password == Math.round(Math.sin(30) + Math.cos(30) * Math.sqrt(Math.tan(60))) + 22) {
-                setCookie("username", user, 30);
-            }
-            else {
-                alert("Invalid username password");
-                quitBox();
-            }
-            if (user != "" && user != null) {
-                setCookie("username", user, 30);
-            }
-        }
+    h1 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    function quitBox() {
-
-        open(location, '_self').close();
+    .status {
+      margin: 15px 0;
+      font-size: 1.5rem;
+      color: #007bff;
+      font-weight: bold;
     }
 
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1);
-            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-        }
-        return "";
+    .table {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
-</script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    .cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button i {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .table {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .lights {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin: 20px auto;
+      animation: glow 3s infinite alternate ease-in-out;
+      opacity: 0.1;
+    }
+
+    .lights.on {
+      opacity: 1;
+      animation: glow 1s infinite alternate ease-in-out;
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 8px #ddd;
+      }
+      to {
+        box-shadow: 0 0 25px #ff0, 0 0 35px #f00, 0 0 45px #00f;
+      }
+    }
+
+    .lights.off {
+      opacity: 0.1;
+    }
+
+    .status {
+      font-size: 1.4rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .status.success {
+      color: #28a745;
+    }
+
+    .status.error {
+      color: #dc3545;
+    }
+  </style>
 </head>
 <body>
+  <h1>Christmas Lights Control</h1>
+  <div class="lights"></div>
+  <div class="status">Status: Waiting for Action...</div>
 
-        <script>
+  <div class="table">
+    <div class="cell"><button onclick="blinkCoolAll()"><i>❄️</i>Cool Blink</button></div>
+    <div class="cell"><button onclick="blinkCoolOne()"><i>❄️</i>Cool Blink Seq</button></div>
+    <div class="cell"><button onclick="stayCool()"><i>❄️</i>Cool Stay</button></div>
 
-                function stop() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/stop/", true);
-                    xhr.send();
-                }
+    <div class="cell"><button onclick="blinkWarmAll()"><i>🔥</i>Warm Blink</button></div>
+    <div class="cell"><button onclick="blinkWarmOne()"><i>🔥</i>Warm Blink Seq</button></div>
+    <div class="cell"><button onclick="stayWarm()"><i>🔥</i>Warm Stay</button></div>
 
-                function blink_cool_all() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/coolall/", true);
-                    xhr.send();
-                }
+    <div class="cell"><button onclick="blinkAll()"><i>💡</i>Mix Blink</button></div>
+    <div class="cell"><button onclick="blinkOne()"><i>💡</i>Mix Blink Seq</button></div>
+    <div class="cell"><button onclick="stayAll()"><i>💡</i>Mix Stay</button></div>
 
-                function blink_cool_one() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/coolone/", true);
-                    xhr.send();
-                }
+    <div class="cell"><button onclick="stop()"><i>⛔</i>Stop All</button></div>
+    <div class="cell"></div>
+    <div class="cell"><button onclick="mix()"><i>🔀</i>Mix All</button></div>
+  </div>
 
-                function blink_warm_all() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/warmall/", true);
-                    xhr.send();
-                }
+  <script>
+    function sendRequest(endpoint, action) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', endpoint, true);
+      xhr.send();
 
-                function blink_warm_one() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/warmone/", true);
-                    xhr.send();
-                }
+      updateStatus(action, 'success');
+    }
 
-                function blink_all() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/blinkall/", true);
-                    xhr.send();
-                }
+    function updateStatus(message, type = '') {
+      const statusElement = document.querySelector('.status');
+      statusElement.textContent = message;
+      statusElement.className = 'status ' + type;
+    }
 
-                function blink_one() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/blinkone/", true);
-                    xhr.send();
-                }
+    function toggleLight(isOn) {
+      const light = document.querySelector('.lights');
+      if (isOn) {
+        light.classList.add('on');
+        light.classList.remove('off');
+      } else {
+        light.classList.remove('on');
+        light.classList.add('off');
+      }
+    }
 
-                function mix() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/random/", true);
-                    xhr.send();
-                }
+    function stop() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET',"http://192.168.1.151:3000/christmaslight/stop/", true)
+      updateStatus("All Lights Turned Off", 'error');
+      xhr.send();
+      toggleLight(false);
+    }
 
-                function stay_cool() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/staycool/", true);
-                    xhr.send();
-                }
-
-                function stay_warm() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/staywarm/", true);
-                    xhr.send();
-                }
-
-                function stay_all() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "http://192.168.1.151:3000/christmaslight/stayall/", true);
-                    xhr.send();
-                }
-
-                </script>
-      <Center>
-        <p>Christmas Lights</p>
-
-    <div class="table">
-            <div class="row">
-                <div class="cell1"> <a href="#" onmousedown="javscript:blink_cool_all()">Cool Blink</a></div>
-                <div class="cell2"> <a href="#" onmousedown="javscript:blink_cool_one()">Cool Blink Seq</a></div>
-                <div class="cell3"> <a href="#" onmousedown="javscript:stay_cool()">Cool Stay</a></div>
-            </div>
-            <div class="row">
-                <div class="cell1"> <a href="#" onmousedown="javscript:blink_warm_all()">Warm Blink</a></div>
-                <div class="cell2"> <a href="#" onmousedown="javscript:blink_warm_one()">Warm Blink seq</a></div>
-                <div class="cell3"> <a href="#" onmousedown="javscript:stay_warm()">Warm Stay</a></div>
-            </div>
-            <div class="row">
-                <div class="cell1"> <a href="#" onmousedown="javscript:blink_all()">Mix Blink</a></div>
-                <div class="cell2"> <a href="#" onmousedown="javscript:blink_one()">Mix Blink Seq</a></div>
-                <div class="cell3"> <a href="#" onmousedown="javscript:stay_all()">Mix Stay</a></div>
-            </div>
-            <div class="row">
-                <div class="cell1"> <a href="#" onmousedown="javscript:stop()">Stop All</a></div>
-                <div class="cell2"> </div>
-                <div class="cell3"> <a href="#" onmousedown="javscript:mix()">Mix All</a></div>
-            </div>
-        </div>
-        </Center>
-
+    function blinkCoolAll() { sendRequest("http://192.168.1.151:3000/christmaslight/coolall/", "Cool Blink All"); toggleLight(true); }
+    function blinkCoolOne() { sendRequest("http://192.168.1.151:3000/christmaslight/coolone/", "Cool Blink Sequence"); toggleLight(true); }
+    function blinkWarmAll() { sendRequest("http://192.168.1.151:3000/christmaslight/warmall/", "Warm Blink All"); toggleLight(true); }
+    function blinkWarmOne() { sendRequest("http://192.168.1.151:3000/christmaslight/warmone/", "Warm Blink Sequence"); toggleLight(true); }
+    function blinkAll() { sendRequest("http://192.168.1.151:3000/christmaslight/blinkall/", "Mix Blink All"); toggleLight(true); }
+    function blinkOne() { sendRequest("http://192.168.1.151:3000/christmaslight/blinkone/", "Mix Blink Sequence"); toggleLight(true); }
+    function mix() { sendRequest("http://192.168.1.151:3000/christmaslight/random/", "Mix All Lights"); toggleLight(true); }
+    function stayCool() { sendRequest("http://192.168.1.151:3000/christmaslight/staycool/", "Cool Lights Stay"); toggleLight(true); }
+    function stayWarm() { sendRequest("http://192.168.1.151:3000/christmaslight/staywarm/", "Warm Lights Stay"); toggleLight(true); }
+    function stayAll() { sendRequest("http://192.168.1.151:3000/christmaslight/stayall/", "All Lights Stay"); toggleLight(true); }
+  </script>
 </body>
 </html>
